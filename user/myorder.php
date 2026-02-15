@@ -36,6 +36,7 @@ $username_safe = mysqli_real_escape_string($con, $username);
               <th>Email</th>
               <th>Qty</th>
               <th>Price</th>
+              <th>Payment</th>
               <th>Order Date</th>
               <th>Status</th>
               <th>Action</th>
@@ -73,9 +74,12 @@ $username_safe = mysqli_real_escape_string($con, $username);
                     echo '<td>'.htmlspecialchars($row['user'] ?? 'N/A').'</td>';
                     echo '<td>'.htmlspecialchars($display_qty).'</td>';
                     echo '<td>₹'.htmlspecialchars($row['pprice']).'</td>';
-                    // Removed extra total column to match Pending table headers
+                    echo '<td>'.htmlspecialchars($row['payment_method'] ?? 'N/A').'</td>';
+
                     echo '<td>'.htmlspecialchars($row['pdate'] ?? $row['created_at'] ?? '').'</td>';
+
                     echo '<td><span class="badge bg-'.$badge_color.'">'.htmlspecialchars($row['status']).'</span></td>';
+
                     // Action (cancel) - only for normal orders (no customization_id) and not delivered/cancelled
                     $can_cancel = empty($row['customization_id']) && !in_array(strtolower($row['status'] ?? ''), ['delivered','cancelled']);
                     echo '<td>';
@@ -111,6 +115,7 @@ $username_safe = mysqli_real_escape_string($con, $username);
               <th>Qty</th>
               <th>Price</th>
               <th>Total Price</th>
+              <th>Payment</th>
               <th>Order Date</th>
               <th>Delivered Date</th>
               <th>Cancelled Date</th>
@@ -149,12 +154,17 @@ $username_safe = mysqli_real_escape_string($con, $username);
                     echo '<td>'.htmlspecialchars($display_qty).'</td>';
                     echo '<td>₹'.htmlspecialchars(number_format($row['pprice'],2)).'</td>';
                     echo '<td>₹'.htmlspecialchars(number_format($total,2)).'</td>';
+                    echo '<td>'.htmlspecialchars($row['payment_method'] ?? 'N/A').'</td>';
+
                     $order_date = !empty($row['pdate']) ? date('d M Y, H:i', strtotime($row['pdate'])) : (!empty($row['created_at']) ? date('d M Y, H:i', strtotime($row['created_at'])) : '');
                     echo '<td>'.htmlspecialchars($order_date).'</td>';
+
                     echo '<td>'.htmlspecialchars(!empty($row['delivered_at']) ? date('d M Y, H:i', strtotime($row['delivered_at'])) : '').'</td>';
+
                     echo '<td>'.htmlspecialchars(!empty($row['canceled_at']) ? date('d M Y, H:i', strtotime($row['canceled_at'])) : '').'</td>';
+
                     echo '<td><span class="badge bg-'.$badge_color.'">'.htmlspecialchars($row['status']).'</span></td>';
-                    
+
                     echo '<form action="orderstatus.php" method="post" style="display: inline;">';
                     echo '<input type="hidden" name="order_id" value="'.htmlspecialchars($order_id).'">';
                     $prod_id_val = isset($row['prod_id']) ? $row['prod_id'] : (isset($row['pid']) ? $row['pid'] : '');

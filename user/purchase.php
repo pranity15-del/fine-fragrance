@@ -76,7 +76,19 @@ include('../admin/conn.php');
                             </div>
                         </div>
                         <hr>
-                        <h4 class="text-end">Total: <strong>₹<?php echo htmlspecialchars(number_format($pprice * $pqty,2)); ?></strong></h4>
+                        <?php $total = (float)$pprice * (int)$pqty; ?>
+                        <h4 class="text-end">Total: <strong>₹<?php echo htmlspecialchars(number_format($total,2)); ?></strong></h4>
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" id="simulated" value="Simulated Payment" checked>
+                                <label class="form-check-label" for="simulated">Simulated Payment (Demo)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" id="cod" value="Cash on Delivery">
+                                <label class="form-check-label" for="cod">Cash on Delivery (COD)</label>
+                            </div>
+                        </div>
                         <?php if ($has_address): ?>
                         <button type="submit" class="btn btn-success w-100 mt-3"><i class="bi bi-check2-circle me-2"></i>Confirm Purchase</button>
                         <?php else: ?>

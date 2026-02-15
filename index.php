@@ -119,7 +119,7 @@ $feat = mysqli_query($con, "SELECT * FROM product ORDER BY pid DESC LIMIT 6");
   <div class="row g-4">
     <div class="col-md-4 c1">
       <div class="card p-3 text-center">
-        <img src="slide1.png" alt="Fragrances" class="img-fluid rounded mb-3" style="height:160px;object-fit:cover;">
+        <img src="productimg/c1.png" alt="Fragrances" class="img-fluid rounded mb-3" style="height:160px;object-fit:cover;">
         <h5>Fragrances</h5>
         <p class="muted-small">Signature perfumes and classic blends.</p>
         <a href="user/view_product.php" class="btn btn-outline-dark btn-sm mt-2">Shop Fragrances</a>
@@ -127,7 +127,7 @@ $feat = mysqli_query($con, "SELECT * FROM product ORDER BY pid DESC LIMIT 6");
     </div>
     <div class="col-md-4 c2">
       <div class="card p-3 text-center">
-        <img src="slide2.png" alt="Gift Sets" class="img-fluid rounded mb-3" style="height:160px;object-fit:cover;">
+        <img src="productimg/c2.png" alt="Gift Sets" class="img-fluid rounded mb-3" style="height:160px;object-fit:cover;">
         <h5>Gift Sets</h5>
         <p class="muted-small">Curated gift sets for special occasions.</p>
         <a href="user/view_product.php" class="btn btn-outline-dark btn-sm mt-2">Explore Gift Sets</a>
@@ -135,7 +135,7 @@ $feat = mysqli_query($con, "SELECT * FROM product ORDER BY pid DESC LIMIT 6");
     </div>
     <div class="col-md-4 c3">
       <div class="card p-3 text-center">
-        <img src="slide3.png" alt="New Arrivals" class="img-fluid rounded mb-3" style="height:160px;object-fit:cover;">
+        <img src="productimg/c3.png" alt="New Arrivals" class="img-fluid rounded mb-3" style="height:160px;object-fit:cover;">
         <h5>New Arrivals</h5>
         <p class="muted-small">Latest fragrances and limited editions.</p>
         <a href="user/view_product.php" class="btn btn-outline-dark btn-sm mt-2">Browse New Arrivals</a>

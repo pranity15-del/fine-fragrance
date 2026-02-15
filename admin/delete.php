@@ -38,7 +38,7 @@ if($fetch_result && mysqli_num_rows($fetch_result) > 0) {
     $result = mysqli_query($con, $sqlq);
     
     if($result) {
-        header('Location:view_product.php');
+        header('Location:index.php');
         exit();
     } else {
         echo "Error deleting product: " . mysqli_error($con);

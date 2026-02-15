@@ -71,12 +71,12 @@ if(mysqli_num_rows($result) > 0) {
     <div class="col-6 col-md-4 col-lg-3">
         <div class="card h-100 product-card" style="border: none; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: all 0.3s ease;">
             <!-- Image Section -->
-            <div style="position: relative; overflow: hidden; height: 220px; background-color: #f8f9fa;">
-                <img src="../productimg/<?php echo htmlspecialchars($row['pimg']); ?>" class="w-100 h-100" alt="<?php echo htmlspecialchars($row['pname']); ?>" style="object-fit: cover; transition: transform 0.3s ease;">
-                <div style="position: absolute; top: 10px; right: 10px; background-color: #d4af37; color: #000; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">
+            <div class="product-img-wrapper">
+                <img src="../productimg/<?php echo htmlspecialchars($row['pimg']); ?>" class="product-img" alt="<?php echo htmlspecialchars($row['pname']); ?>">
+                <div class="product-price-badge">
                     ₹<?php echo htmlspecialchars(number_format($row['pprice'],2)); ?>
                 </div>
-                <div style="position: absolute; bottom: 10px; left: 10px; background-color: <?php echo $stock_color; ?>; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">
+                <div class="product-stock-badge" style="background-color: <?php echo $stock_color; ?>;">
                     <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i><?php echo $stock_text; ?>
                 </div>
             </div>
@@ -161,21 +161,61 @@ if(mysqli_num_rows($result) > 0) {
 </div>
 
 <style>
+    .product-img-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4/3;
+        background: #f8f9fa;
+        overflow: hidden;
+        border-radius: 10px 10px 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        border-radius: 10px 10px 0 0;
+    }
     .product-card:hover {
         transform: translateY(-6px);
         box-shadow: 0 12px 25px rgba(212, 175, 55, 0.15) !important;
     }
-
-    .product-card:hover img {
+    .product-card:hover .product-img {
         transform: scale(1.08);
     }
-
+    .product-price-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #d4af37;
+        color: #000;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        z-index: 2;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .product-stock-badge {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 2;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
     .page-link.active {
         background-color: #d4af37 !important;
         border-color: #d4af37 !important;
         color: #000 !important;
     }
-
     .page-link:hover {
         color: #d4af37 !important;
     }

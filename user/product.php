@@ -1,19 +1,18 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
-include('header.php');
 include('../admin/conn.php');
 
 // Verify database connection
 if (!$con) {
-    die("Database connection failed. Please try again later.");
+  die("Database connection failed. Please try again later.");
 }
 
 $pid = intval($_GET['pid'] ?? 0);
 if ($pid <= 0) { 
-    header('Location: view_product.php'); 
-    exit; 
+  header('Location: view_product.php'); 
+  exit; 
 }
 
 // Fetch product with error handling
@@ -21,17 +20,17 @@ $sql = "SELECT * FROM product WHERE pid = $pid LIMIT 1";
 $res = mysqli_query($con, $sql);
 
 if (!$res) {
-    // Query failed - log error and redirect
-    error_log("MySQL Error: " . mysqli_error($con));
-    error_log("Query: " . $sql);
-    header('Location: view_product.php');
-    exit;
+  // Query failed - log error and redirect
+  error_log("MySQL Error: " . mysqli_error($con));
+  error_log("Query: " . $sql);
+  header('Location: view_product.php');
+  exit;
 }
 
 if (mysqli_num_rows($res) == 0) {
-    // Product not found
-    header('Location: view_product.php');
-    exit;
+  // Product not found
+  header('Location: view_product.php');
+  exit;
 }
 
 $p = mysqli_fetch_assoc($res);
@@ -42,22 +41,24 @@ $imgSql = "SELECT filename, is_primary FROM product_images WHERE product_id = $p
 $imgRes = mysqli_query($con, $imgSql);
 
 if ($imgRes && mysqli_num_rows($imgRes) > 0) {
-    while ($r = mysqli_fetch_assoc($imgRes)) {
-        $imgs[] = $r['filename'];
-    }
+  while ($r = mysqli_fetch_assoc($imgRes)) {
+    $imgs[] = $r['filename'];
+  }
 }
 
 // Fallback to primary product image if no images found
 if (empty($imgs) && !empty($p['pimg'])) {
-    $imgs[] = $p['pimg'];
+  $imgs[] = $p['pimg'];
 }
 
 // If still no images, use a placeholder
 if (empty($imgs)) {
-    $imgs[] = 'placeholder.png';
+  $imgs[] = 'placeholder.png';
 }
 
 $stock = isset($p['stock']) && $p['stock'] !== null ? (int)$p['stock'] : (int)$p['pqty'];
+
+include('header.php');
 ?>
 
 <div class="container mb-5" style="max-width: 1200px;">
@@ -199,7 +200,7 @@ $stock = isset($p['stock']) && $p['stock'] !== null ? (int)$p['stock'] : (int)$p
 
       <!-- Back Button -->
       <div class="text-center">
-        <a href="view_product.php" class="btn btn-outline-secondary" style="border-color: #d4af37; color: #d4af37;">
+        <a href="index.php" class="btn btn-outline-secondary" style="border-color: #d4af37; color: #d4af37;">
           <i class="bi bi-arrow-left me-2"></i>Back to Products
         </a>
       </div>

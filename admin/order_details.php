@@ -42,6 +42,7 @@ $row = mysqli_fetch_assoc($result);
           <p><strong>Product Name:</strong> <?php echo htmlspecialchars($row['pname'] ?? ''); ?></p>
           <p><strong>Quantity:</strong> <?php echo htmlspecialchars($row['pqty'] ?? ''); ?></p>
           <p><strong>Price:</strong> <?php echo htmlspecialchars($row['pprice'] ?? ''); ?></p>
+          <p><strong>Payment Method:</strong> <?php echo htmlspecialchars($row['payment_method'] ?? 'N/A'); ?></p>
           <p><strong>Company:</strong> <?php echo htmlspecialchars($row['pcompany'] ?? ''); ?></p>
           <p><strong>Description:</strong> <?php echo htmlspecialchars($row['pdis'] ?? ''); ?></p>
           <?php $total = (float)($row['pprice'] ?? 0) * (int)($row['pqty'] ?? 0); ?>
